@@ -1,8 +1,17 @@
+import { FC } from 'react';
 import ReactPaginate from 'react-paginate';
+import { setCurrentPage } from '../../redux/slices/filterSlice';
+import { useAppDispatch } from '../../redux/store';
 
 import style from './Pagination.module.scss';
 
-const Pagination = ({ setCurrentPage }) => {
+interface IPagination {
+  currentPage: number 
+}
+
+const Pagination: FC<IPagination> = ({ currentPage }) => {
+  const dispatch = useAppDispatch()
+
   return (
     <ReactPaginate
       containerClassName={style.root}
@@ -12,11 +21,11 @@ const Pagination = ({ setCurrentPage }) => {
       nextLinkClassName={style.next}
       disabledLinkClassName={style.disabled}
       nextLabel="След"
-      onPageChange={(value) => setCurrentPage(value.selected + 1)}
+      onPageChange={(value) => dispatch(setCurrentPage(value.selected))}
       pageRangeDisplayed={4}
       pageCount={3}
+      forcePage={currentPage - 1}
       previousLabel="Пред"
-      renderOnZeroPageCount={null}
     />
   );
 };
