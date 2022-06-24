@@ -74,7 +74,7 @@ const PizzaBlock: FC<PizzaType> = ({ id, title, imageUrl, types, sizes, price })
               />
             </svg>
             <span>Добавить</span>
-            {count && <i>{count}</i>}
+            {count && count > 0 ? <i>{count}</i> : <></>}
           </button>
         </div>
       </div>
